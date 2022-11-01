@@ -1,6 +1,8 @@
 import sqlite3
 import flask
 
+from flask import jsonify
+
 from utils import search_by_tite, search_by_release_year, search_by_rating, search_by_genre
 
 app = flask.Flask(__name__)
@@ -21,13 +23,13 @@ def view_release_year(year_1, year_2):
 @app.route("/rating/<rating>")
 def view_rating(rating):
     result = search_by_rating(rating)
-    return result
+    return jsonify(result)
 
 
 @app.route("/genre/<genre>")
 def view_genre(genre):
     result = search_by_genre(genre)
-    return result
+    return jsonify(result)
 
 if __name__ == '__main__':
     app.run()
